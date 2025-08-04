@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 
 interface CityData {
@@ -156,8 +155,9 @@ const citiesData: { [key: string]: CityData } = {
   }
 };
 
-export default function CityPage({ params }: { params: { city: string } }) {
-  const cityData = citiesData[params.city];
+export default async function CityPage({ params }: { params: Promise<{ city: string }> }) {
+  const { city } = await params;
+  const cityData = citiesData[city];
 
   if (!cityData) {
     notFound();

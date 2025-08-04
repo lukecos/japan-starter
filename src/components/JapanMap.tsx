@@ -182,7 +182,6 @@ const cities: City[] = [
 
 export default function JapanMap() {
   const [selectedCity, setSelectedCity] = useState<City | null>(cities.find(city => city.id === 'tokyo') || null);
-  const [hoveredCity, setHoveredCity] = useState<string | null>(null);
 
   return (
     <div className="w-full space-y-4">
@@ -269,7 +268,7 @@ export default function JapanMap() {
               
               {/* City labels - positioned separately with higher z-index */}
               {cities.map((city) => (
-                (hoveredCity === city.id || selectedCity?.id === city.id) && (
+                selectedCity?.id === city.id && (
                   <div
                     key={`label-${city.id}`}
                     className="absolute pointer-events-none z-50"

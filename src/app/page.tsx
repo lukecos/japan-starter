@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import JapanMap from "../components/JapanMap";
 
 interface FAQItem {
@@ -163,7 +162,7 @@ export default function Home() {
             <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg border p-8">
               <h4 className="text-2xl font-bold text-gray-800 mb-4">Still have questions?</h4>
               <p className="text-gray-600 mb-6">
-                Couldn't find what you were looking for? These resources can help you plan your perfect Japan adventure.
+                Couldn&apos;t find what you were looking for? These resources can help you plan your perfect Japan adventure.
               </p>
               <div className="grid md:grid-cols-2 gap-4">
                 <a
