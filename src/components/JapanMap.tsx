@@ -208,24 +208,21 @@ export default function JapanMap() {
       </div>
 
       {/* Interactive Map Container */}
-      <div className="w-full bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600 p-3 sm:p-6 rounded-xl shadow-lg overflow-hidden">
-      <div className="grid lg:grid-cols-3 gap-3 sm:gap-6 w-full min-w-0">
+      <div className="w-full bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600 p-2 sm:p-3 md:p-6 rounded-xl shadow-lg">
+      <div className="grid lg:grid-cols-3 gap-3 sm:gap-6 w-full">
         {/* Interactive Japan Map */}
-        <div className="lg:col-span-2 w-full min-w-0">
-          <div className="relative w-full flex justify-center items-center overflow-hidden h-[400px] min-h-[350px] pt-2 pb-2 sm:h-[550px] sm:pt-5 sm:pb-5">
+        <div className="lg:col-span-2 w-full">
+          <div className="relative w-full flex justify-center items-center p-2 sm:p-4 min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
             {/* Image and markers container - they scale together */}
-            <div className="relative inline-block">
+            <div className="relative inline-block w-full max-w-full">
               <img 
                 src="/images/image.png" 
                 alt="Japan Map" 
-                className="block object-contain"
+                className="block object-contain w-full h-auto max-w-full"
                 style={{ 
-                  maxWidth: '1100px', 
-                  maxHeight: '510px', 
-                  minWidth: '250px', 
-                  minHeight: '150px',
-                  width: 'auto',
-                  height: 'auto'
+                  maxWidth: '100%',
+                  height: 'auto',
+                  minHeight: '250px'
                 }}
               />
               {/* Cities positioned directly on the image - they scale with the image */}
@@ -253,7 +250,7 @@ export default function JapanMap() {
                       title={city.name}
                     >
                       <svg 
-                        className="w-6 h-6 md:w-7 md:h-7"
+                        className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7"
                         fill="currentColor" 
                         viewBox="0 0 24 24"
                       >
@@ -281,9 +278,9 @@ export default function JapanMap() {
                     <div
                       className={`
                         absolute left-1/2 transform -translate-x-1/2
-                        ${city.y < 45 ? 'top-8' : 'bottom-8'}
-                        bg-gray-900/95 backdrop-blur-sm px-2 py-1 rounded-md shadow-lg
-                        text-xs md:text-sm font-semibold text-white whitespace-nowrap
+                        ${city.y < 45 ? 'top-6 sm:top-8' : 'bottom-6 sm:bottom-8'}
+                        bg-gray-900/95 backdrop-blur-sm px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md shadow-lg
+                        text-xs sm:text-sm font-semibold text-white whitespace-nowrap
                         transition-all duration-200 ease-in-out
                         opacity-100 scale-100
                       `}

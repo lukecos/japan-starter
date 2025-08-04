@@ -91,16 +91,16 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
+              <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
                 Japan Starter
-              </h1>
+              </div>
             </div>
             <nav className="hidden md:flex space-x-6">
               <a href="#map" className="text-gray-600 hover:text-red-500 font-medium transition-colors">
                 Explore Map
               </a>
               <a href="#faq" className="text-gray-600 hover:text-red-500 font-medium transition-colors">
-                Travel FAQ
+                Travel FAQs
               </a>
             </nav>
           </div>
@@ -109,12 +109,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6">
+        <h1 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6">
           Your First
           <span className="block bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
             Japan Adventure
           </span>
-        </h2>
+        </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
           New to Japan travel? Choose a city on the map below to discover the must-see destinations and start planning your perfect first trip to Japan.
         </p>
@@ -126,70 +126,21 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          {/* FAQ Header */}
-          <div className="text-center mb-12">
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Travel FAQ
-              <span className="block text-lg md:text-xl mt-2 bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent font-medium">
-                Top 10 Essential Tips for Visiting Japan
-              </span>
-            </h3>
-          </div>
-
-          {/* FAQ Items */}
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-6">
-              {faqData.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow"
-                >
-                  <h4 className="text-xl font-semibold text-gray-800 mb-3">
-                    {item.question}
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact Section */}
-          <div id="contact" className="max-w-2xl mx-auto mt-16 text-center">
-            <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg border p-8">
-              <h4 className="text-2xl font-bold text-gray-800 mb-4">Still have questions?</h4>
-              <p className="text-gray-600 mb-6">
-                Couldn&apos;t find what you were looking for? These resources can help you plan your perfect Japan adventure.
-              </p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <a
-                  href="https://www.japan.travel/en/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                >
-                  <span>Official Japan Tourism</span>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                  </svg>
-                </a>
-                <a
-                  href="https://www.reddit.com/r/JapanTravel/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  <span>r/JapanTravel Community</span>
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                  </svg>
-                </a>
+      <section id="faq" className="container mx-auto px-4 py-16" aria-labelledby="faq-heading">
+        <h2 id="faq-heading" className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          Travel FAQs
+        </h2>
+        <div className="grid gap-6 max-w-4xl mx-auto">
+          {faqData.map((faq, index) => (
+            <article key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                {faq.question}
+              </h3>
+              <div className="text-gray-600 leading-relaxed">
+                {faq.answer}
               </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
       </section>
 
