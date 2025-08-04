@@ -26,11 +26,11 @@ const cities: City[] = [
     region: 'Kanto',
     description: 'The bustling capital city, a perfect blend of traditional and modern Japan.',
     attractions: [
-      { name: 'Tsukiji Outer Market', rating: 4.4, reviewCount: 32145 },
-      { name: 'Senso-ji Temple', rating: 4.3, reviewCount: 65123 },
-      { name: 'Shibuya Crossing', rating: 4.2, reviewCount: 45876 },
-      { name: 'Imperial Palace', rating: 4.2, reviewCount: 28734 },
-      { name: 'Tokyo Skytree', rating: 4.1, reviewCount: 89542 }
+      { name: 'Tsukiji Outer Market', rating: 4.3, reviewCount: 28567 },
+      { name: 'Senso-ji Temple', rating: 4.5, reviewCount: 85269 },
+      { name: 'Shibuya Crossing', rating: 4.4, reviewCount: 52341 },
+      { name: 'Imperial Palace', rating: 4.2, reviewCount: 24789 },
+      { name: 'Tokyo Skytree', rating: 4.0, reviewCount: 91456 }
     ],
     imageUrl: '/images/tokyo.jpg'
   },
@@ -42,11 +42,11 @@ const cities: City[] = [
     region: 'Kansai',
     description: 'Known as the kitchen, famous for incredible food and vibrant nightlife.',
     attractions: [
-      { name: 'Dotonbori District', rating: 4.5, reviewCount: 78123 },
-      { name: 'Universal Studios Japan', rating: 4.4, reviewCount: 95672 },
-      { name: 'Sumiyoshi Taisha Shrine', rating: 4.4, reviewCount: 12387 },
-      { name: 'Osaka Castle', rating: 4.3, reviewCount: 52341 },
-      { name: 'Kuromon Ichiba Market', rating: 4.2, reviewCount: 18456 }
+      { name: 'Dotonbori District', rating: 4.4, reviewCount: 89123 },
+      { name: 'Universal Studios Japan', rating: 4.3, reviewCount: 127856 },
+      { name: 'Sumiyoshi Taisha Shrine', rating: 4.4, reviewCount: 15642 },
+      { name: 'Osaka Castle', rating: 4.2, reviewCount: 67234 },
+      { name: 'Kuromon Ichiba Market', rating: 4.1, reviewCount: 22567 }
     ],
     imageUrl: '/images/osaka.jpg'
   },
@@ -58,11 +58,11 @@ const cities: City[] = [
     region: 'Kansai',
     description: 'The ancient capital with thousands of temples, gardens, and traditional architecture.',
     attractions: [
-      { name: 'Fushimi Inari Shrine', rating: 4.5, reviewCount: 67234 },
-      { name: 'Kiyomizu-dera Temple', rating: 4.4, reviewCount: 48567 },
-      { name: 'Arashiyama Bamboo Grove', rating: 4.3, reviewCount: 35678 },
-      { name: 'Nijo Castle', rating: 4.3, reviewCount: 22156 },
-      { name: 'Gion District', rating: 4.2, reviewCount: 29845 }
+      { name: 'Fushimi Inari Shrine', rating: 4.5, reviewCount: 98567 },
+      { name: 'Kiyomizu-dera Temple', rating: 4.4, reviewCount: 56789 },
+      { name: 'Arashiyama Bamboo Grove', rating: 4.3, reviewCount: 43256 },
+      { name: 'Nijo Castle', rating: 4.2, reviewCount: 34567 },
+      { name: 'Gion District', rating: 4.3, reviewCount: 27845 }
     ],
     imageUrl: '/images/kyoto.jpg'
   },
@@ -74,11 +74,11 @@ const cities: City[] = [
     region: 'Chugoku',
     description: 'A city of peace and remembrance, with beautiful nearby Miyajima Island.',
     attractions: [
-      { name: 'Peace Memorial Park', rating: 4.6, reviewCount: 45234 },
-      { name: 'Itsukushima Shrine (Miyajima)', rating: 4.5, reviewCount: 38967 },
-      { name: 'Atomic Bomb Dome', rating: 4.4, reviewCount: 34567 },
-      { name: 'Shukkei-en Garden', rating: 4.3, reviewCount: 12456 },
-      { name: 'Hiroshima Castle', rating: 4.2, reviewCount: 18734 }
+      { name: 'Peace Memorial Park', rating: 4.7, reviewCount: 67234 },
+      { name: 'Itsukushima Shrine (Miyajima)', rating: 4.6, reviewCount: 45789 },
+      { name: 'Atomic Bomb Dome', rating: 4.5, reviewCount: 52367 },
+      { name: 'Shukkei-en Garden', rating: 4.3, reviewCount: 18456 },
+      { name: 'Hiroshima Castle', rating: 4.1, reviewCount: 23789 }
     ],
     imageUrl: '/images/hiroshima.jpg'
   },
@@ -90,11 +90,11 @@ const cities: City[] = [
     region: 'Chubu',
     description: 'Sacred mountain and highest peak.',
     attractions: [
-      { name: 'Chureito Pagoda', rating: 4.5, reviewCount: 19834 },
-      { name: 'Hakone National Park', rating: 4.4, reviewCount: 31245 },
-      { name: 'Fuji Five Lakes', rating: 4.3, reviewCount: 28567 },
-      { name: 'Kawaguchi Lake', rating: 4.2, reviewCount: 22456 },
-      { name: 'Oshino Hakkai', rating: 4.1, reviewCount: 14567 }
+      { name: 'Chureito Pagoda', rating: 4.4, reviewCount: 28945 },
+      { name: 'Hakone National Park', rating: 4.3, reviewCount: 45678 },
+      { name: 'Fuji Five Lakes', rating: 4.2, reviewCount: 35789 },
+      { name: 'Kawaguchi Lake', rating: 4.3, reviewCount: 31456 },
+      { name: 'Oshino Hakkai', rating: 4.0, reviewCount: 19567 }
     ],
     imageUrl: '/images/mount-fuji.jpg'
   },
@@ -106,11 +106,11 @@ const cities: City[] = [
     region: 'Hokkaido',
     description: 'The snowy northern city famous for beer, ramen, and winter festivals.',
     attractions: [
-      { name: 'Sapporo Snow Festival', rating: 4.6, reviewCount: 25634 },
-      { name: 'Jozankei Hot Springs', rating: 4.5, reviewCount: 12845 },
-      { name: 'Odori Park', rating: 4.4, reviewCount: 22134 },
-      { name: 'Sapporo Beer Garden', rating: 4.3, reviewCount: 14567 },
-      { name: 'Susukino District', rating: 4.2, reviewCount: 18945 }
+      { name: 'Sapporo Snow Festival', rating: 4.5, reviewCount: 34567 },
+      { name: 'Jozankei Hot Springs', rating: 4.4, reviewCount: 19234 },
+      { name: 'Odori Park', rating: 4.3, reviewCount: 28456 },
+      { name: 'Sapporo Beer Garden', rating: 4.2, reviewCount: 21789 },
+      { name: 'Susukino District', rating: 4.1, reviewCount: 25678 }
     ],
     imageUrl: '/images/sapporo.jpg'
   },
@@ -122,11 +122,11 @@ const cities: City[] = [
     region: 'Kansai',
     description: 'First permanent capital, famous for free-roaming deer and ancient temples.',
     attractions: [
-      { name: 'Todai-ji Temple', rating: 4.5, reviewCount: 42567 },
-      { name: 'Nara Park', rating: 4.4, reviewCount: 38234 },
-      { name: 'Isuien Garden', rating: 4.4, reviewCount: 8734 },
-      { name: 'Kasuga Taisha Shrine', rating: 4.3, reviewCount: 24567 },
-      { name: 'Kofuku-ji Temple', rating: 4.2, reviewCount: 18945 }
+      { name: 'Todai-ji Temple', rating: 4.5, reviewCount: 78234 },
+      { name: 'Nara Park', rating: 4.4, reviewCount: 65789 },
+      { name: 'Isuien Garden', rating: 4.3, reviewCount: 12456 },
+      { name: 'Kasuga Taisha Shrine', rating: 4.4, reviewCount: 34567 },
+      { name: 'Kofuku-ji Temple', rating: 4.2, reviewCount: 28945 }
     ],
     imageUrl: '/images/nara.jpg'
   },
@@ -138,11 +138,11 @@ const cities: City[] = [
     region: 'Kanto',
     description: 'A UNESCO World Heritage site with ornate shrines and beautiful nature.',
     attractions: [
-      { name: 'Nikko National Park', rating: 4.6, reviewCount: 28945 },
-      { name: 'Toshogu Shrine', rating: 4.5, reviewCount: 35234 },
-      { name: 'Kegon Falls', rating: 4.4, reviewCount: 19867 },
-      { name: 'Lake Chuzenji', rating: 4.3, reviewCount: 15623 },
-      { name: 'Rinnai-ji Temple', rating: 4.2, reviewCount: 12456 }
+      { name: 'Nikko National Park', rating: 4.5, reviewCount: 42789 },
+      { name: 'Toshogu Shrine', rating: 4.4, reviewCount: 56234 },
+      { name: 'Kegon Falls', rating: 4.3, reviewCount: 28567 },
+      { name: 'Lake Chuzenji', rating: 4.2, reviewCount: 21456 },
+      { name: 'Rinnai-ji Temple', rating: 4.2, reviewCount: 18789 }
     ],
     imageUrl: '/images/nikko.jpg'
   },
@@ -154,11 +154,11 @@ const cities: City[] = [
     region: 'Chubu',
     description: 'Major industrial city with impressive castle and unique local cuisine.',
     attractions: [
-      { name: 'SCMAGLEV Railway Park', rating: 4.4, reviewCount: 16789 },
-      { name: 'Nagoya Castle', rating: 4.3, reviewCount: 28567 },
-      { name: 'Atsuta Shrine', rating: 4.2, reviewCount: 19834 },
-      { name: 'Tokugawa Art Museum', rating: 4.2, reviewCount: 8945 },
-      { name: 'Osu Shopping District', rating: 4.1, reviewCount: 14623 }
+      { name: 'SCMAGLEV Railway Park', rating: 4.3, reviewCount: 24789 },
+      { name: 'Nagoya Castle', rating: 4.2, reviewCount: 43567 },
+      { name: 'Atsuta Shrine', rating: 4.3, reviewCount: 28934 },
+      { name: 'Tokugawa Art Museum', rating: 4.1, reviewCount: 12456 },
+      { name: 'Osu Shopping District', rating: 4.0, reviewCount: 18789 }
     ],
     imageUrl: '/images/nagoya.jpg'
   },
@@ -170,11 +170,11 @@ const cities: City[] = [
     region: 'Kyushu',
     description: 'Gateway to Asia with delicious ramen and vibrant street food culture.',
     attractions: [
-      { name: 'Yatai Food Stalls', rating: 4.5, reviewCount: 15967 },
-      { name: 'Dazaifu Tenmangu Shrine', rating: 4.4, reviewCount: 26834 },
-      { name: 'Nakasu District', rating: 4.3, reviewCount: 22567 },
-      { name: 'Canal City Hakata', rating: 4.2, reviewCount: 19456 },
-      { name: 'Fukuoka Castle Ruins', rating: 4.1, reviewCount: 18234 }
+      { name: 'Yatai Food Stalls', rating: 4.3, reviewCount: 23567 },
+      { name: 'Dazaifu Tenmangu Shrine', rating: 4.4, reviewCount: 38945 },
+      { name: 'Nakasu District', rating: 4.2, reviewCount: 31234 },
+      { name: 'Canal City Hakata', rating: 4.1, reviewCount: 28567 },
+      { name: 'Fukuoka Castle Ruins', rating: 4.0, reviewCount: 19856 }
     ],
     imageUrl: '/images/fukuoka.jpg'
   }
