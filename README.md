@@ -1,8 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🇯🇵 Discover Japan - Interactive Travel Website
 
-## Getting Started
+A beautiful, interactive website for exploring Japan's major cities and tourist attractions. Built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## ✨ Features
+
+- **Interactive Comic-Style Map**: Click on major Japanese cities to explore their attractions
+- **City Detail Pages**: Comprehensive information about each city including:
+  - Top tourist attractions with descriptions
+  - Local food specialties
+  - Best time to visit
+  - Transportation information
+- **Responsive Design**: Optimized for both desktop and mobile devices
+- **Modern UI**: Clean, colorful design with smooth animations
+- **Fast Performance**: Built with Next.js for optimal loading speeds
+
+## 🗾 Cities Included
+
+- **Tokyo** - The bustling capital city
+- **Osaka** - Japan's kitchen with incredible food
+- **Kyoto** - Ancient capital with temples and tradition
+- **Hiroshima** - City of peace with historical significance
+- **Mount Fuji** - Japan's iconic sacred mountain
+- **Sapporo** - Northern city famous for snow and beer
+- **Nara** - Historic city with free-roaming deer
+- **Nikko** - UNESCO World Heritage shrines and nature
+
+## 🚀 Getting Started
+
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +45,76 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Built With
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 15** - React framework for production
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **React** - UI library
+- **SVG** - For the interactive map graphics
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── cities/[city]/page.tsx    # Dynamic city detail pages
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx               # Root layout
+│   └── page.tsx                 # Homepage with interactive map
+├── components/
+│   ├── JapanMap.tsx             # Interactive SVG map component
+│   └── CityModal.tsx            # City information modal
+└── .github/
+    └── copilot-instructions.md  # Development guidelines
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Comic-style map** with hover effects and smooth transitions
+- **Gradient backgrounds** and modern color schemes
+- **Interactive elements** with visual feedback
+- **Emoji integration** for visual appeal and cultural representation
+- **Responsive grid layouts** for attraction listings
+- **Smooth scrolling** and navigation
 
-## Deploy on Vercel
+## 🌟 Interactive Elements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Clickable city markers** on the main map
+- **Hover effects** with expanding circles and color changes
+- **Modal popups** with city information and quick actions
+- **Navigation between** map view and detailed city pages
+- **Responsive design** that works on all devices
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Mobile Friendly
+
+The website is fully responsive and optimized for:
+- Desktop computers
+- Tablets
+- Mobile phones
+- Various screen sizes and orientations
+
+## 🔮 Future Enhancements
+
+- Real-time weather information for each city
+- Integration with booking services for hotels and restaurants
+- User reviews and ratings for attractions
+- Photo galleries for each city and attraction
+- Interactive itinerary planning
+- Multi-language support
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+Built with ❤️ for Japan travel enthusiasts
