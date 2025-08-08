@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 
+interface Attraction {
+  id: string;
+  name: string;
+  category: string[];
+  rating: number;
+  reviewCount: number;
+  description: string;
+}
+
 interface City {
   id: string;
   name: string;
@@ -9,11 +18,7 @@ interface City {
   y: number;
   region: string;
   description: string;
-  attractions: {
-    name: string;
-    rating: number;
-    reviewCount: number;
-  }[];
+  topAttractions: Attraction[];
   imageUrl: string;
 }
 
@@ -24,13 +29,88 @@ const cities: City[] = [
     x: 55,
     y: 55,
     region: 'Kanto',
-    description: 'The bustling capital city, a perfect blend of traditional and modern Japan.',
-    attractions: [
-      { name: 'Tsukiji Outer Market', rating: 4.3, reviewCount: 28567 },
-      { name: 'Senso-ji Temple', rating: 4.5, reviewCount: 85269 },
-      { name: 'Shibuya Crossing', rating: 4.4, reviewCount: 52341 },
-      { name: 'Imperial Palace', rating: 4.2, reviewCount: 24789 },
-      { name: 'Tokyo Skytree', rating: 4.0, reviewCount: 91456 }
+    description: 'The bustling capital city, perfect for first-time visitors with endless attractions.',
+    topAttractions: [
+      {
+        id: 'senso-ji',
+        name: 'Senso-ji Temple',
+        category: ['free', 'culture', 'relaxing'],
+        rating: 4.5,
+        reviewCount: 85269,
+        description: 'Tokyo\'s oldest temple with traditional atmosphere and shopping street.'
+      },
+      {
+        id: 'shibuya-crossing',
+        name: 'Shibuya Crossing',
+        category: ['free', 'fun', 'iconic'],
+        rating: 4.4,
+        reviewCount: 52341,
+        description: 'The world\'s busiest pedestrian crossing and Tokyo\'s most iconic spot.'
+      },
+      {
+        id: 'tsukiji-market',
+        name: 'Tsukiji Outer Market',
+        category: ['food', 'paid', 'fun'],
+        rating: 4.3,
+        reviewCount: 28567,
+        description: 'Famous food market with fresh sushi and street food.'
+      },
+      {
+        id: 'tokyo-skytree',
+        name: 'Tokyo Skytree',
+        category: ['paid', 'views', 'fun'],
+        rating: 4.0,
+        reviewCount: 91456,
+        description: 'Tokyo\'s tallest tower with panoramic city views.'
+      },
+      {
+        id: 'meiji-shrine',
+        name: 'Meiji Shrine',
+        category: ['free', 'culture', 'relaxing'],
+        rating: 4.4,
+        reviewCount: 76234,
+        description: 'Peaceful Shinto shrine surrounded by forest in the heart of Tokyo.'
+      },
+      {
+        id: 'harajuku',
+        name: 'Harajuku District',
+        category: ['free', 'fun', 'shopping'],
+        rating: 4.2,
+        reviewCount: 45123,
+        description: 'Colorful youth culture district with unique fashion and cafes.'
+      },
+      {
+        id: 'imperial-palace',
+        name: 'Imperial Palace Gardens',
+        category: ['free', 'relaxing', 'nature'],
+        rating: 4.2,
+        reviewCount: 24789,
+        description: 'Beautiful traditional gardens surrounding the Imperial Palace.'
+      },
+      {
+        id: 'akihabara',
+        name: 'Akihabara Electric Town',
+        category: ['free', 'fun', 'technology'],
+        rating: 4.1,
+        reviewCount: 38965,
+        description: 'Electronics and anime culture district with countless shops.'
+      },
+      {
+        id: 'teamlab-borderless',
+        name: 'teamLab Borderless',
+        category: ['paid', 'fun', 'art'],
+        rating: 4.6,
+        reviewCount: 34567,
+        description: 'Immersive digital art museum with stunning interactive exhibits.'
+      },
+      {
+        id: 'ginza',
+        name: 'Ginza District',
+        category: ['free', 'shopping', 'luxury'],
+        rating: 4.3,
+        reviewCount: 29876,
+        description: 'Upscale shopping and dining district with luxury brands.'
+      }
     ],
     imageUrl: '/images/tokyo.jpg'
   },
@@ -40,143 +120,181 @@ const cities: City[] = [
     x: 37,
     y: 60,
     region: 'Kansai',
-    description: 'Known as the kitchen, famous for incredible food and vibrant nightlife.',
-    attractions: [
-      { name: 'Dotonbori District', rating: 4.4, reviewCount: 89123 },
-      { name: 'Universal Studios Japan', rating: 4.3, reviewCount: 127856 },
-      { name: 'Sumiyoshi Taisha Shrine', rating: 4.4, reviewCount: 15642 },
-      { name: 'Osaka Castle', rating: 4.2, reviewCount: 67234 },
-      { name: 'Kuromon Ichiba Market', rating: 4.1, reviewCount: 22567 }
+    description: 'Japan\'s kitchen - famous for incredible food and vibrant nightlife.',
+    topAttractions: [
+      {
+        id: 'dotonbori',
+        name: 'Dotonbori District',
+        category: ['free', 'food', 'fun'],
+        rating: 4.4,
+        reviewCount: 89123,
+        description: 'Vibrant entertainment district famous for neon lights and street food.'
+      },
+      {
+        id: 'osaka-castle',
+        name: 'Osaka Castle',
+        category: ['paid', 'culture', 'history'],
+        rating: 4.2,
+        reviewCount: 67234,
+        description: 'Historic castle with museum and beautiful surrounding park.'
+      },
+      {
+        id: 'universal-studios',
+        name: 'Universal Studios Japan',
+        category: ['paid', 'fun', 'theme-park'],
+        rating: 4.3,
+        reviewCount: 127856,
+        description: 'World-class theme park with Harry Potter and Nintendo worlds.'
+      },
+      {
+        id: 'kuromon-market',
+        name: 'Kuromon Ichiba Market',
+        category: ['food', 'paid', 'culture'],
+        rating: 4.1,
+        reviewCount: 22567,
+        description: 'Traditional market known as "Osaka\'s Kitchen" with fresh seafood.'
+      },
+      {
+        id: 'sumiyoshi-taisha',
+        name: 'Sumiyoshi Taisha Shrine',
+        category: ['free', 'culture', 'relaxing'],
+        rating: 4.4,
+        reviewCount: 15642,
+        description: 'One of Japan\'s oldest Shinto shrines with distinctive architecture.'
+      },
+      {
+        id: 'shinsaibashi',
+        name: 'Shinsaibashi Shopping',
+        category: ['free', 'shopping', 'fun'],
+        rating: 4.2,
+        reviewCount: 41235,
+        description: 'Premier shopping district with covered arcades and department stores.'
+      },
+      {
+        id: 'osaka-aquarium',
+        name: 'Osaka Aquarium Kaiyukan',
+        category: ['paid', 'fun', 'family'],
+        rating: 4.3,
+        reviewCount: 56789,
+        description: 'One of the world\'s largest aquariums featuring whale sharks.'
+      },
+      {
+        id: 'namba-parks',
+        name: 'Namba Parks',
+        category: ['free', 'shopping', 'relaxing'],
+        rating: 4.1,
+        reviewCount: 18945,
+        description: 'Modern shopping complex with rooftop garden and city views.'
+      },
+      {
+        id: 'takoyaki-street',
+        name: 'Takoyaki Museum',
+        category: ['food', 'paid', 'fun'],
+        rating: 4.0,
+        reviewCount: 23456,
+        description: 'Food theme park dedicated to Osaka\'s famous takoyaki.'
+      },
+      {
+        id: 'tempozan-wheel',
+        name: 'Tempozan Giant Ferris Wheel',
+        category: ['paid', 'views', 'relaxing'],
+        rating: 4.0,
+        reviewCount: 14789,
+        description: 'Large ferris wheel offering panoramic views of Osaka Bay.'
+      }
     ],
     imageUrl: '/images/osaka.jpg'
   },
   {
     id: 'kyoto',
     name: 'Kyoto',
-    x: 40,
-    y: 57,
+    x: 35,
+    y: 58,
     region: 'Kansai',
-    description: 'The ancient capital with thousands of temples, gardens, and traditional architecture.',
-    attractions: [
-      { name: 'Fushimi Inari Shrine', rating: 4.5, reviewCount: 98567 },
-      { name: 'Kiyomizu-dera Temple', rating: 4.4, reviewCount: 56789 },
-      { name: 'Arashiyama Bamboo Grove', rating: 4.3, reviewCount: 43256 },
-      { name: 'Nijo Castle', rating: 4.2, reviewCount: 34567 },
-      { name: 'Gion District', rating: 4.3, reviewCount: 27845 }
+    description: 'Ancient capital with traditional temples, gardens, and cultural experiences.',
+    topAttractions: [
+      {
+        id: 'fushimi-inari',
+        name: 'Fushimi Inari Shrine',
+        category: ['free', 'culture', 'nature'],
+        rating: 4.6,
+        reviewCount: 123456,
+        description: 'Famous shrine with thousands of red torii gates up the mountain.'
+      },
+      {
+        id: 'kiyomizu-dera',
+        name: 'Kiyomizu-dera Temple',
+        category: ['paid', 'culture', 'views'],
+        rating: 4.5,
+        reviewCount: 89234,
+        description: 'Historic wooden temple with stunning city views, especially during cherry blossom season.'
+      },
+      {
+        id: 'arashiyama-bamboo',
+        name: 'Arashiyama Bamboo Grove',
+        category: ['free', 'nature', 'relaxing'],
+        rating: 4.3,
+        reviewCount: 67890,
+        description: 'Magical bamboo forest creating natural green tunnels.'
+      },
+      {
+        id: 'golden-pavilion',
+        name: 'Kinkaku-ji Golden Pavilion',
+        category: ['paid', 'culture', 'iconic'],
+        rating: 4.4,
+        reviewCount: 78901,
+        description: 'Kyoto\'s most famous temple covered in gold leaf, reflected in a pond.'
+      },
+      {
+        id: 'gion-district',
+        name: 'Gion Historic District',
+        category: ['free', 'culture', 'walking'],
+        rating: 4.3,
+        reviewCount: 45678,
+        description: 'Traditional geisha district with historic wooden houses and tea shops.'
+      },
+      {
+        id: 'philosopher-path',
+        name: 'Philosopher\'s Path',
+        category: ['free', 'nature', 'relaxing'],
+        rating: 4.2,
+        reviewCount: 34567,
+        description: 'Peaceful walking path along a canal, beautiful during cherry blossom season.'
+      },
+      {
+        id: 'nijo-castle',
+        name: 'Nijo Castle',
+        category: ['paid', 'culture', 'history'],
+        rating: 4.3,
+        reviewCount: 43210,
+        description: 'Historic castle with "nightingale floors" and beautiful gardens.'
+      },
+      {
+        id: 'ryoan-ji',
+        name: 'Ryoan-ji Rock Garden',
+        category: ['paid', 'culture', 'relaxing'],
+        rating: 4.1,
+        reviewCount: 23456,
+        description: 'Famous zen rock garden perfect for contemplation and meditation.'
+      },
+      {
+        id: 'pontocho-alley',
+        name: 'Pontocho Alley',
+        category: ['free', 'food', 'culture'],
+        rating: 4.2,
+        reviewCount: 29876,
+        description: 'Narrow alley with traditional restaurants and bars along the river.'
+      },
+      {
+        id: 'todai-ji-temple',
+        name: 'Todai-ji Temple',
+        category: ['paid', 'culture', 'history'],
+        rating: 4.4,
+        reviewCount: 65432,
+        description: 'Home to one of Japan\'s largest bronze Buddha statues in a massive wooden hall.'
+      }
     ],
     imageUrl: '/images/kyoto.jpg'
-  },
-  {
-    id: 'hiroshima',
-    name: 'Hiroshima',
-    x: 22,
-    y: 60,
-    region: 'Chugoku',
-    description: 'A city of peace and remembrance, with beautiful nearby Miyajima Island.',
-    attractions: [
-      { name: 'Peace Memorial Park', rating: 4.7, reviewCount: 67234 },
-      { name: 'Itsukushima Shrine (Miyajima)', rating: 4.6, reviewCount: 45789 },
-      { name: 'Atomic Bomb Dome', rating: 4.5, reviewCount: 52367 },
-      { name: 'Shukkei-en Garden', rating: 4.3, reviewCount: 18456 },
-      { name: 'Hiroshima Castle', rating: 4.1, reviewCount: 23789 }
-    ],
-    imageUrl: '/images/hiroshima.jpg'
-  },
-  {
-    id: 'mount-fuji',
-    name: 'Mount Fuji',
-    x: 50,
-    y: 57,
-    region: 'Chubu',
-    description: 'Sacred mountain and highest peak.',
-    attractions: [
-      { name: 'Chureito Pagoda', rating: 4.4, reviewCount: 28945 },
-      { name: 'Hakone National Park', rating: 4.3, reviewCount: 45678 },
-      { name: 'Fuji Five Lakes', rating: 4.2, reviewCount: 35789 },
-      { name: 'Kawaguchi Lake', rating: 4.3, reviewCount: 31456 },
-      { name: 'Oshino Hakkai', rating: 4.0, reviewCount: 19567 }
-    ],
-    imageUrl: '/images/mount-fuji.jpg'
-  },
-  {
-    id: 'sapporo',
-    name: 'Sapporo',
-    x: 63,
-    y: 18,
-    region: 'Hokkaido',
-    description: 'The snowy northern city famous for beer, ramen, and winter festivals.',
-    attractions: [
-      { name: 'Sapporo Snow Festival', rating: 4.5, reviewCount: 34567 },
-      { name: 'Jozankei Hot Springs', rating: 4.4, reviewCount: 19234 },
-      { name: 'Odori Park', rating: 4.3, reviewCount: 28456 },
-      { name: 'Sapporo Beer Garden', rating: 4.2, reviewCount: 21789 },
-      { name: 'Susukino District', rating: 4.1, reviewCount: 25678 }
-    ],
-    imageUrl: '/images/sapporo.jpg'
-  },
-  {
-    id: 'nara',
-    name: 'Nara',
-    x: 37,
-    y: 64,
-    region: 'Kansai',
-    description: 'First permanent capital, famous for free-roaming deer and ancient temples.',
-    attractions: [
-      { name: 'Todai-ji Temple', rating: 4.5, reviewCount: 78234 },
-      { name: 'Nara Park', rating: 4.4, reviewCount: 65789 },
-      { name: 'Isuien Garden', rating: 4.3, reviewCount: 12456 },
-      { name: 'Kasuga Taisha Shrine', rating: 4.4, reviewCount: 34567 },
-      { name: 'Kofuku-ji Temple', rating: 4.2, reviewCount: 28945 }
-    ],
-    imageUrl: '/images/nara.jpg'
-  },
-  {
-    id: 'nikko',
-    name: 'Nikko',
-    x: 57,
-    y: 48,
-    region: 'Kanto',
-    description: 'A UNESCO World Heritage site with ornate shrines and beautiful nature.',
-    attractions: [
-      { name: 'Nikko National Park', rating: 4.5, reviewCount: 42789 },
-      { name: 'Toshogu Shrine', rating: 4.4, reviewCount: 56234 },
-      { name: 'Kegon Falls', rating: 4.3, reviewCount: 28567 },
-      { name: 'Lake Chuzenji', rating: 4.2, reviewCount: 21456 },
-      { name: 'Rinnai-ji Temple', rating: 4.2, reviewCount: 18789 }
-    ],
-    imageUrl: '/images/nikko.jpg'
-  },
-  {
-    id: 'nagoya',
-    name: 'Nagoya',
-    x: 42,
-    y: 59,
-    region: 'Chubu',
-    description: 'Major industrial city with impressive castle and unique local cuisine.',
-    attractions: [
-      { name: 'SCMAGLEV Railway Park', rating: 4.3, reviewCount: 24789 },
-      { name: 'Nagoya Castle', rating: 4.2, reviewCount: 43567 },
-      { name: 'Atsuta Shrine', rating: 4.3, reviewCount: 28934 },
-      { name: 'Tokugawa Art Museum', rating: 4.1, reviewCount: 12456 },
-      { name: 'Osu Shopping District', rating: 4.0, reviewCount: 18789 }
-    ],
-    imageUrl: '/images/nagoya.jpg'
-  },
-  {
-    id: 'fukuoka',
-    name: 'Fukuoka',
-    x: 15,
-    y: 64,
-    region: 'Kyushu',
-    description: 'Gateway to Asia with delicious ramen and vibrant street food culture.',
-    attractions: [
-      { name: 'Yatai Food Stalls', rating: 4.3, reviewCount: 23567 },
-      { name: 'Dazaifu Tenmangu Shrine', rating: 4.4, reviewCount: 38945 },
-      { name: 'Nakasu District', rating: 4.2, reviewCount: 31234 },
-      { name: 'Canal City Hakata', rating: 4.1, reviewCount: 28567 },
-      { name: 'Fukuoka Castle Ruins', rating: 4.0, reviewCount: 19856 }
-    ],
-    imageUrl: '/images/fukuoka.jpg'
   }
 ];
 
