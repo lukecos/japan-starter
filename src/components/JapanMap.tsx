@@ -440,7 +440,7 @@ export default function JapanMap() {
                 <div>
                   <h4 className="text-sm sm:text-lg font-semibold text-gray-800 mb-2 sm:mb-4">Must-See Attractions</h4>
                   <div className="space-y-1.5 sm:space-y-3">
-                    {selectedCity.attractions.map((attraction, index) => (
+                    {selectedCity.topAttractions.map((attraction, index) => (
                       <a
                         key={index}
                         href={`https://www.google.com/search?q=${encodeURIComponent(attraction.name + ' ' + selectedCity.name + ' Japan')}`}
