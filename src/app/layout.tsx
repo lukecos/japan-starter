@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Japan Starter - Your First Japan Adventure | Complete Travel Guide 2025",
   description: "New to Japan travel? Discover Tokyo, Kyoto, Osaka & more with our interactive map. Essential travel tips, attraction guides, and FAQ for first-time visitors to Japan.",
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   keywords: [
     "Japan travel guide",
     "first time Japan",

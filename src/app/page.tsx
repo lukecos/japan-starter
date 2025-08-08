@@ -12,6 +12,112 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
     return `https://www.google.com/maps/search/?api=1&query=${query}`;
   };
 
+  const getAttractionTimeHours = (attraction: { name: string; city: string; category: string[]; rating: number; description: string; id: string }) => {
+    // Research-based time estimates for different attraction types and specific venues
+    const name = attraction.name.toLowerCase();
+    
+    // Full-day attractions (8+ hours)
+    if (name.includes('universal studios') || name.includes('disneyland')) {
+      return 8; // Theme parks are full-day experiences
+    }
+    
+    // Half-day attractions (3-4 hours)
+    if (name.includes('teamlab') || name.includes('aquarium') || 
+        name.includes('zoo') || name.includes('palace gardens')) {
+      return 3.5;
+    }
+    
+    // Museum/Castle attractions (2-3 hours)
+    if (name.includes('castle') || name.includes('museum') || 
+        name.includes('temple') && (name.includes('todai-ji') || name.includes('kiyomizu'))) {
+      return 2.5;
+    }
+    
+    // Major temples/shrines (1.5-2 hours)
+    if (name.includes('temple') || name.includes('shrine') || 
+        name.includes('pavilion') || name.includes('golden')) {
+      return 1.5;
+    }
+    
+    // Markets and food areas (2-3 hours)
+    if (name.includes('market') || name.includes('takoyaki') || 
+        name.includes('tsukiji') || name.includes('kuromon')) {
+      return 2;
+    }
+    
+    // Walking districts/areas (2-4 hours depending on size)
+    if (name.includes('shibuya') || name.includes('dotonbori') || 
+        name.includes('ginza') || name.includes('shinsaibashi')) {
+      return 3;
+    }
+    if (name.includes('harajuku') || name.includes('akihabara') || 
+        name.includes('gion') || name.includes('pontocho')) {
+      return 2;
+    }
+    
+    // Nature/walking paths (1-3 hours)
+    if (name.includes('bamboo') || name.includes('path') || 
+        name.includes('park') || name.includes('garden')) {
+      return 1.5;
+    }
+    
+    // Quick visits/viewpoints (30 min - 1 hour)
+    if (name.includes('crossing') || name.includes('tower') || 
+        name.includes('skytree') || name.includes('wheel')) {
+      return 1;
+    }
+    
+    // Default for other attractions
+    return 1.5;
+  };
+
+  const estimateTripLength = () => {
+    if (itineraryItems.length === 0) return null;
+    
+    // Calculate total hours needed based on individual attractions
+    let totalHours = 0;
+    itineraryItems.forEach(item => {
+      totalHours += getAttractionTimeHours(item);
+    });
+    
+    // Group by city to calculate travel time
+    const citiesVisited = new Set(itineraryItems.map(item => item.city));
+    const cityCount = citiesVisited.size;
+    
+    // Add travel time between cities (4 hours per additional city)
+    const travelHours = cityCount > 1 ? (cityCount - 1) * 4 : 0;
+    
+    // Add buffer time for meals, rest, and getting around (20% of sightseeing time)
+    const bufferHours = totalHours * 0.2;
+    
+    const grandTotalHours = totalHours + travelHours + bufferHours;
+    
+    // Convert to days (assuming 8-10 hours of sightseeing per day)
+    const totalDays = grandTotalHours / 9; // 9 hours average per day
+    
+    // Format the result more precisely
+    if (totalDays <= 0.6) return "Half day";
+    if (totalDays <= 1.2) return "1 day";
+    if (totalDays <= 1.8) return "1-2 days";
+    if (totalDays <= 2.2) return "2 days";
+    if (totalDays <= 2.8) return "2-3 days";
+    if (totalDays <= 3.2) return "3 days";
+    if (totalDays <= 3.8) return "3-4 days";
+    if (totalDays <= 4.5) return "4-5 days";
+    if (totalDays <= 5.5) return "5-6 days";
+    if (totalDays <= 6.5) return "6-7 days";
+    
+    // For longer trips
+    const roundedDays = Math.round(totalDays);
+    if (roundedDays === totalDays || Math.abs(roundedDays - totalDays) < 0.3) {
+      return `${roundedDays} days`;
+    } else {
+      const lowerBound = Math.floor(totalDays);
+      const upperBound = Math.ceil(totalDays);
+      return `${lowerBound}-${upperBound} days`;
+    }
+  };
+
   const downloadItinerary = () => {
     if (itineraryItems.length === 0) return;
 
@@ -42,6 +148,12 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
     doc.setFont('helvetica', 'normal');
     doc.text(`Total attractions: ${itineraryItems.length}`, margin, yPosition);
     yPosition += 6;
+
+    const estimatedLength = estimateTripLength();
+    if (estimatedLength) {
+      doc.text(`Estimated trip length: ${estimatedLength}`, margin, yPosition);
+      yPosition += 6;
+    }
     doc.text(`Cities to visit: ${[...new Set(itineraryItems.map(item => item.city))].join(', ')}`, margin, yPosition);
     yPosition += 6;
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, margin, yPosition);
@@ -161,19 +273,19 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
             Your Japan Itinerary
           </h2>
           {itineraryItems.length > 0 && (
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 onClick={downloadItinerary}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2"
+                className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download PDF Itinerary
+                <span className="hidden sm:inline">Download </span>PDF
               </button>
               <button
                 onClick={clearItinerary}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="bg-gray-500 hover:bg-gray-600 text-white px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
               >
                 Clear All
               </button>
@@ -198,9 +310,21 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
           </div>
         ) : (
           <div>
-            <p className="text-gray-600 mb-6">
-              You&apos;ve added {itineraryItems.length} attraction{itineraryItems.length !== 1 ? 's' : ''} to your trip!
-            </p>
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <p className="text-gray-600">
+                  You&apos;ve added {itineraryItems.length} attraction{itineraryItems.length !== 1 ? 's' : ''} to your trip!
+                </p>
+                <div className="flex items-center gap-2 text-sm">
+                  <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-blue-600 font-medium">
+                    Estimated trip length: {estimateTripLength()}
+                  </span>
+                </div>
+              </div>
+            </div>
             {/* Always compact layout now */}
             <div className="grid gap-3 md:grid-cols-2">
               {itineraryItems.map((item, index) => (
@@ -239,12 +363,20 @@ export default function Home() {
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
-                  Japan Starter
+                <div className="flex items-center space-x-2">
+                  {/* Japanese Flag */}
+                  <div className="w-8 h-6 rounded-sm overflow-hidden shadow-sm border border-gray-200">
+                    <div className="w-full h-full bg-white flex items-center justify-center">
+                      <div className="w-4 h-4 bg-red-600 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
+                    Japan Starter Map
+                  </div>
                 </div>
               </div>
               <nav className="hidden md:flex space-x-6">
-                <a href="#map" className="text-gray-600 hover:text-red-500 font-medium transition-colors">Explore Cities</a>
+                <a href="#map" className="text-gray-600 hover:text-red-500 font-medium transition-colors">Explore Destinations</a>
                 <a href="#itinerary" className="text-gray-600 hover:text-red-500 font-medium transition-colors">My Itinerary</a>
               </nav>
             </div>
@@ -252,18 +384,18 @@ export default function Home() {
         </header>
 
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Plan Your First
-            <span className="block bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">Japan Trip</span>
+        <section className="container mx-auto px-4 py-12 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            Discover Japan&apos;s
+            <span className="block bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent pb-2">Big Three</span>
           </h1>
-          <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
-            Never been to Japan? Start here! Click on Tokyo, Osaka, or Kyoto below to see the top 10 must-do activities in each city. Add them to your itinerary and download your personalized trip plan.
+          <p className="text-xl text-white mb-4 max-w-2xl mx-auto">
+            Explore Japan&apos;s three most iconic destinations: Tokyo&apos;s modern energy, Osaka&apos;s incredible food culture, and Kyoto&apos;s timeless traditions.
           </p>
         </section>
 
         {/* Interactive Map Section */}
-        <section id="map" className="container mx-auto px-4 py-8">
+        <section id="map" className="container mx-auto px-4 py-4">
           <JapanMap itinerarySection={<ItinerarySection variant="embedded" />} />
         </section>
 
@@ -276,9 +408,9 @@ export default function Home() {
         <footer className="bg-gray-800 text-white py-12 mt-20">
           <div className="container mx-auto px-4 text-center">
             <div className="flex items-center justify-center space-x-3 mb-4">
-              <h4 className="text-xl font-bold">Japan Starter</h4>
+              <h4 className="text-xl font-bold">Japan&apos;s Big Three</h4>
             </div>
-            <p className="text-gray-400 mb-6">Your first stop on planning your Japan adventure.</p>
+            <p className="text-gray-400 mb-6">Discover Japan&apos;s three most iconic travel destinations.</p>
           </div>
         </footer>
       </div>
