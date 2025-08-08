@@ -184,8 +184,8 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
         {itineraryItems.length === 0 ? (
           <div className="text-center">
             <p className="text-gray-600 mb-6">
-              Click "Add to Trip" on any attraction above to start building your personalized Japan itinerary. 
-              Once you've added some places, you'll be able to download your trip plan as a PDF with Google Maps links!
+              Click &quot;Add to Trip&quot; on any attraction above to start building your personalized Japan itinerary. 
+              Once you&apos;ve added some places, you&apos;ll be able to download your trip plan as a PDF with Google Maps links!
             </p>
             <div className="bg-gray-50 rounded-lg p-6">
               <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@ function ItinerarySection({ variant = 'default' }: { variant?: 'default' | 'embe
         ) : (
           <div>
             <p className="text-gray-600 mb-6">
-              You've added {itineraryItems.length} attraction{itineraryItems.length !== 1 ? 's' : ''} to your trip!
+              You&apos;ve added {itineraryItems.length} attraction{itineraryItems.length !== 1 ? 's' : ''} to your trip!
             </p>
             {/* Always compact layout now */}
             <div className="grid gap-3 md:grid-cols-2">
