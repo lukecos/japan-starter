@@ -785,7 +785,8 @@ export default function JapanMap({ itinerarySection }: JapanMapProps) {
                                       className="flex-1 px-2 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xs font-medium rounded-md transition-colors flex items-center justify-center"
                                       onClick={() => {
                                         const searchQuery = encodeURIComponent(attraction.name);
-                                        window.open(`https://www.instagram.com/explore/search/keyword/?q=${searchQuery}`, '_blank');
+                                        // Use Instagram's general search URL which works better on mobile
+                                        window.open(`https://www.instagram.com/explore/search/?q=${searchQuery}`, '_blank');
                                       }}
                                       title="Search on Instagram"
                                     >
